@@ -1,0 +1,23 @@
+{
+  "name": "online_auction",
+  "version": "1.0.0",
+  "description": "online auction using Node.JS, React.JS and Mysql",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "author": "youssef_ahmed",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.38.4",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.2",
+    "nodemon": "^3.1.9",
+  }
+}
