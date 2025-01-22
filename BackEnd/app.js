@@ -1,5 +1,5 @@
 const express = require("express");
-const authRoutes = require("./routes/auth");
+const authRoutes = require("./routes/authRoutes");
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -12,4 +12,4 @@ app.use((error, req, res, next) => {
   res.status(error.statusCode || 500).json({ message: error.message });
 });
 
-const server = app.listen(8080);
+app.listen(8080);

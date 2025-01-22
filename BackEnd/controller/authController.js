@@ -2,9 +2,18 @@ const db = require("../util/database/setup");
 const { users } = require("../util/database/schema");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { validationResult } = require("express-validator");
 const { eq } = require("drizzle-orm");
 
 exports.signUp = async (req, res, next) => {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    const err = new Error(errors.array()[0].msg);
+    err.statusCode = 422;
+    return next(err);
+  }
+  
   const user = {
     name: req.body.name,
     email: req.body.email,
@@ -13,6 +22,7 @@ exports.signUp = async (req, res, next) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
     user.password = hashedPassword;
+
     await db.insert(users).values(user);
 
     res.status(201).json({
@@ -25,6 +35,14 @@ exports.signUp = async (req, res, next) => {
 };
 
 exports.logIn = async (req, res, next) => {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    const err = new Error(errors.array()[0].msg);
+    err.statusCode = 422;
+    return next(err);
+  }
+  
   const email = req.body.email;
   const password = req.body.password;
 
