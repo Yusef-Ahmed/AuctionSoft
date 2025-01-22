@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "b78a7696-1297-4d1e-a8d0-84cd37c807f2",
+		"name": "MegaAuction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26665155",
+		"_collection_link": "https://galactic-escape-868080.postman.co/workspace/Team-Workspace~7a7b2848-6daa-4f2d-87c7-d488644b1abf/collection/26665155-b78a7696-1297-4d1e-a8d0-84cd37c807f2?action=share&source=collection_link&creator=26665155"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"youssef ahmed\",\r\n    \"email\": \"yousseffcai@gmail.com\",\r\n    \"password\": \"11223344\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/signUp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signUp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"yousseffcai@gmail.com\",\r\n    \"password\": \"11223344\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/logIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"logIn"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIyLCJpYXQiOjE3Mzc1ODc3MjQsImV4cCI6MTczNzY3NDEyNH0.IvCVvrJfzpn_yX7Bm2wWPUFLhY6k1d3PGPzHEd93YsQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test it\",\r\n    \"image\": \"req.body.image\",\r\n    \"price\": 523,\r\n    \"ex_date\": \"2025-01-23 15:30:45\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/createProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"createProduct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
