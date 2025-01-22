@@ -4,8 +4,8 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DB URL is missing");
 }
 export default defineConfig({
-  schema: "./src/database/schema.js",
-  out: "./src/database/migrations",
+  schema: "./util/database/schema.js",
+  out: "./util/database/migrations",
   dbCredentials: {
     url: process.env.DATABASE_URL,
   },

@@ -1,5 +1,5 @@
-const db = require("../src/database/setup");
-const {products} = require("../src/database/schema");
+const db = require("../util/database/setup");
+const {products} = require("../util/database/schema");
 
 exports.addProduct = async (req, res, next) => {
   const name = "iphone";
