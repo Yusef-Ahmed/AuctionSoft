@@ -3,9 +3,8 @@ const authController = require("../controller/auth");
 const prodController = require("../controller/addProduct");
 const router = express.Router();
 
-
 router.post("/signUp", authController.signUp);
 
-// router.get("/product", prodController.addProduct);
+router.post("/logIn", authController.logIn);
 
 module.exports = router;
