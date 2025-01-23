@@ -107,6 +107,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "allProducts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		}
