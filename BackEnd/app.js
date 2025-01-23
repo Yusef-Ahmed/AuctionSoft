@@ -11,7 +11,7 @@ app.use("/auth", authRoutes);
 
 app.use("/products", productsRoutes);
 
-app.use((error, req, res, next) => {
+app.use((error, _req, res, _next) => {
   res.status(error.statusCode || 500).json({ message: error.message });
 });
 
