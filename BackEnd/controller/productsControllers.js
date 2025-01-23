@@ -39,11 +39,15 @@ exports.newBidder = async (req, res, next) => {
 
   try {
     const [product] = await db
-      .select({ seller_id: products.seller_id, price: products.price })
+      .select({
+        seller_id: products.seller_id,
+        price: products.price,
+        ex_data: products.ex_date,
+      })
       .from(products)
       .where(eq(productId, products.id));
 
-    if (!product) {
+    if (!product || new Date(product.ex_data) - new Date() < 0) {
       const err = new Error("The product doesn't exist anymore");
       err.statusCode = 401;
       return next(err);
@@ -66,7 +70,7 @@ exports.newBidder = async (req, res, next) => {
       .set({ price: newPrice, buyer_id: buyerId })
       .where(eq(productId, products.id));
 
-    res.status(200).json({message : "Updated successfully"});
+    res.status(200).json({ message: "Updated successfully" });
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
     next(err);
