@@ -6,3 +6,5 @@ build/
 .env
 
 src/database/migrations/
+
+testing.sql

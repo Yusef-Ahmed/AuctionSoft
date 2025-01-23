@@ -4,6 +4,7 @@ const productsRoutes = require("./routes/productsRoutes");
 const bodyParser = require("body-parser");
 
 const app = express();
+console.log(new Date());
 
 app.use(bodyParser.json());
 

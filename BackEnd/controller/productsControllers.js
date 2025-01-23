@@ -1,10 +1,13 @@
-const { eq } = require("drizzle-orm");
+const { eq, gte, sql } = require("drizzle-orm");
 const { products } = require("../util/database/schema");
 const db = require("../util/database/setup");
 
 exports.allProducts = async (_req, res, next) => {
   try {
-    const allProducts = await db.select().from(products);
+    const allProducts = await db
+      .select()
+      .from(products)
+      .where(sql`products.ex_date > CURRENT_TIMESTAMP`);
     res.status(200).json(allProducts);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
@@ -42,12 +45,12 @@ exports.newBidder = async (req, res, next) => {
       .select({
         seller_id: products.seller_id,
         price: products.price,
-        ex_data: products.ex_date,
+        ex_date: products.ex_date,
       })
       .from(products)
       .where(eq(productId, products.id));
 
-    if (!product || new Date(product.ex_data) - new Date() < 0) {
+    if (!product || new Date(product.ex_date) - new Date() < 0) {
       const err = new Error("The product doesn't exist anymore");
       err.statusCode = 401;
       return next(err);
