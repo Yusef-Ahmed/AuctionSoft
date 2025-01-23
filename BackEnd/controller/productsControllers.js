@@ -1,6 +1,7 @@
 const { eq, gte, sql } = require("drizzle-orm");
 const { products } = require("../util/database/schema");
 const db = require("../util/database/setup");
+const { validationResult } = require("express-validator");
 
 exports.allProducts = async (_req, res, next) => {
   try {
@@ -16,6 +17,14 @@ exports.allProducts = async (_req, res, next) => {
 };
 
 exports.createProduct = async (req, res, next) => {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    const err = new Error(errors.array()[0].msg);
+    err.statusCode = 422;
+    return next(err);
+  }
+  
   const product = {
     name: req.body.name,
     image: req.body.image,

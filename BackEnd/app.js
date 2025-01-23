@@ -2,9 +2,9 @@ const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const productsRoutes = require("./routes/productsRoutes");
 const bodyParser = require("body-parser");
+const task = require("./schedule");
 
 const app = express();
-console.log(new Date());
 
 app.use(bodyParser.json());
 
@@ -16,4 +16,6 @@ app.use((error, _req, res, _next) => {
   res.status(error.statusCode || 500).json({ message: error.message });
 });
 
-app.listen(8080);
+app.listen(8080, () => {
+  task.start();
+});

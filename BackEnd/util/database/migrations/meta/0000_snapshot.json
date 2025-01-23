@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "072dd886-19e3-45b5-982a-90bd982c5a34",
+  "id": "38af5fd6-1149-4fa2-8781-945a8f5e7444",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "users": {
@@ -111,7 +111,7 @@
           "name": "buyer_id",
           "type": "bigint unsigned",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         }
       },
@@ -152,14 +152,7 @@
           ]
         }
       },
-      "uniqueConstraints": {
-        "products_name_unique": {
-          "name": "products_name_unique",
-          "columns": [
-            "name"
-          ]
-        }
-      },
+      "uniqueConstraints": {},
       "checkConstraint": {}
     },
     "reviews": {
@@ -226,6 +219,99 @@
           ]
         }
       },
+      "checkConstraint": {}
+    },
+    "sold": {
+      "name": "sold",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "price": {
+          "name": "price",
+          "type": "decimal(9,2)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ex_date": {
+          "name": "ex_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "seller_id": {
+          "name": "seller_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "buyer_id": {
+          "name": "buyer_id",
+          "type": "bigint unsigned",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sold_seller_id_users_id_fk": {
+          "name": "sold_seller_id_users_id_fk",
+          "tableFrom": "sold",
+          "tableTo": "users",
+          "columnsFrom": [
+            "seller_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "sold_buyer_id_users_id_fk": {
+          "name": "sold_buyer_id_users_id_fk",
+          "tableFrom": "sold",
+          "tableTo": "users",
+          "columnsFrom": [
+            "buyer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sold_id": {
+          "name": "sold_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
       "checkConstraint": {}
     }
   },

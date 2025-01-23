@@ -31,3 +31,13 @@ exports.reviews = mysqlTable("reviews", {
   rating: tinyint().notNull(),
   seller_id: bigint({ mode: 'number', unsigned: true }).references(() => this.users.id).notNull(),
 });
+
+exports.sold = mysqlTable("sold", {
+  id: serial().primaryKey(),
+  name: varchar({ length: 256 }).notNull(),
+  image: varchar({ length: 256 }).notNull(),
+  price: decimal({ precision: 9, scale: 2 }).notNull(),
+  ex_date: timestamp().notNull(),
+  seller_id: bigint({ mode: 'number', unsigned: true }).references(() => this.users.id).notNull(),
+  buyer_id: bigint({ mode: 'number', unsigned: true }).references(() => this.users.id),
+})
