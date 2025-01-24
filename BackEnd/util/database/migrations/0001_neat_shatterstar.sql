@@ -1,0 +1,2 @@
+ALTER TABLE `reviews` ADD `owner` bigint unsigned NOT NULL;--> statement-breakpoint
+ALTER TABLE `reviews` ADD CONSTRAINT `reviews_owner_users_id_fk` FOREIGN KEY (`owner`) REFERENCES `users`(`id`) ON DELETE no action ON UPDATE no action;
