@@ -13,10 +13,11 @@ function App() {
       id: "root",
       element: <RootLayout />,
       errorElement: <NotFound />,
+      loader: getToken,
       children: [
         { index: true, element: <Home /> },
         { path: "/auctions", element: <Products />, loader: checkAuthLoader },
-        { path: "/auth", element: <Auth />, loader: getToken },
+        { path: "/auth", element: <Auth /> },
       ],
     },
   ]);

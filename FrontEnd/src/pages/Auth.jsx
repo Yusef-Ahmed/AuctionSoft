@@ -1,9 +1,7 @@
-import { useLoaderData } from "react-router-dom";
+import AuthForm from "../components/AuthForm";
 
 function Auth() {
-  const isLogged = useLoaderData();
-  
-  return <h1>{isLogged ? "logout" : "login"}</h1>;
+  return <AuthForm />;
 }
 
 export default Auth;
