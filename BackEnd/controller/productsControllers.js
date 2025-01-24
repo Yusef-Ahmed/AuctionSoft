@@ -45,6 +45,14 @@ exports.createProduct = async (req, res, next) => {
 };
 
 exports.newBidder = async (req, res, next) => {
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    const err = new Error(errors.array()[0].msg);
+    err.statusCode = 422;
+    return next(err);
+  }
+  
   const productId = req.body.productId;
   const buyerId = +req.userId;
   const newPrice = +req.body.newPrice;

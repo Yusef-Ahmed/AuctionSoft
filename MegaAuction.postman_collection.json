@@ -80,13 +80,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIyLCJpYXQiOjE3Mzc1ODc3MjQsImV4cCI6MTczNzY3NDEyNH0.IvCVvrJfzpn_yX7Bm2wWPUFLhY6k1d3PGPzHEd93YsQ",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczNzY3Mzc1OCwiZXhwIjoxNzM3NzYwMTU4fQ.ZZNqq1JL5YBVl7DVeQHQy6C4hQ3gKOX3m1X4VP93zIk",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"test it\",\r\n    \"image\": \"req.body.image\",\r\n    \"price\": 523,\r\n    \"ex_date\": \"2025-01-23 15:30:45\"\r\n}",
+							"raw": "{\r\n    \"name\": \"test it\",\r\n    \"image\": \"req.body.image\",\r\n    \"price\": 523,\r\n    \"ex_date\": \"2025-01-23T02:15:53Z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -110,6 +110,107 @@
 				},
 				{
 					"name": "allProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczNzY3Mzc1OCwiZXhwIjoxNzM3NzYwMTU4fQ.ZZNqq1JL5YBVl7DVeQHQy6C4hQ3gKOX3m1X4VP93zIk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/products/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newBidder",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIzLCJpYXQiOjE3Mzc2NDkzMTIsImV4cCI6MTczNzczNTcxMn0.HhV1fkwzSpe6xK8NfuRWuDeS1IFkcBUPHrFxjt6904U",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\" : 9,\r\n    \"newPrice\" : 700\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/newbidder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"newbidder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "addReview",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczNzY3Mzc1OCwiZXhwIjoxNzM3NzYwMTU4fQ.ZZNqq1JL5YBVl7DVeQHQy6C4hQ3gKOX3m1X4VP93zIk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"review\": \"He is a good seller\",\r\n    \"rating\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reviews/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allReviews",
 					"request": {
 						"method": "GET",
 						"header": []
