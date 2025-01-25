@@ -80,13 +80,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczNzY3Mzc1OCwiZXhwIjoxNzM3NzYwMTU4fQ.ZZNqq1JL5YBVl7DVeQHQy6C4hQ3gKOX3m1X4VP93zIk",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsImlhdCI6MTczNzgyOTM0OSwiZXhwIjoxNzM3OTE1NzQ5fQ.y7sxnKxMjWTB2leq_3zbrT2l5dDJmtONGiQEoksvMqA",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"test it\",\r\n    \"image\": \"req.body.image\",\r\n    \"price\": 523,\r\n    \"ex_date\": \"2025-01-23T02:15:53Z\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Final test\",\r\n    \"image\": \"https://i.pinimg.com/736x/b6/a0/64/b6a064006e8965bdd40128bbc8618a54.jpg\",\r\n    \"price\": 999,\r\n    \"ex_date\": \"2025-01-25T06:13:00Z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -164,6 +164,82 @@
 							"path": [
 								"products",
 								"newbidder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "soldProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTczNzgzNjM5NywiZXhwIjoxNzM3OTIyNzk3fQ.QpYJU5VdZdsjlDfskHMbiSSz-qN3VUr4A0xWFS88Tb0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/sold",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"sold"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "boughtProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczNzgzNjc1MiwiZXhwIjoxNzM3OTIzMTUyfQ.Af8G8_Euwlg2RAKejaWdjsrmU_DOlD6ATKMIOZm1QMY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/bought",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"bought"
 							]
 						}
 					},
