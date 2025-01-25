@@ -3,8 +3,8 @@ import RootLayout from "./pages/RootLayout";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
-import { checkAuthLoader, getToken } from "./util/authentication";
-import Auth from "./pages/Auth";
+import { checkAuthLoader, handleLogOut, logInCheck } from "./util/authentication";
+import Auth, { authAction } from "./pages/Auth";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,11 +13,12 @@ function App() {
       id: "root",
       element: <RootLayout />,
       errorElement: <NotFound />,
-      loader: getToken,
+      loader: logInCheck,
       children: [
         { index: true, element: <Home /> },
         { path: "/auctions", element: <Products />, loader: checkAuthLoader },
-        { path: "/auth", element: <Auth /> },
+        { path: "/auth", element: <Auth />, action: authAction },
+        {path : "/logOut", action: handleLogOut}
       ],
     },
   ]);

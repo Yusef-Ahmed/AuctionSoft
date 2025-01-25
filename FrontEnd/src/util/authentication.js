@@ -12,6 +12,14 @@ export function getToken() {
   return localStorage.getItem("token");
 }
 
+export function logInCheck() {
+  const token = getToken();
+  if (!token || expiredToken()) {
+    logOut();
+  }
+  return token;
+}
+
 export function checkAuthLoader() {
   const token = getToken()
   
@@ -21,6 +29,11 @@ export function checkAuthLoader() {
   }
   
   return null;
+}
+
+export function handleLogOut() {
+  logOut();
+  return redirect("/");
 }
 
 export function logOut() {
