@@ -1,5 +1,5 @@
-const { eq, gte, sql } = require("drizzle-orm");
-const { products } = require("../util/database/schema");
+const { eq, sql } = require("drizzle-orm");
+const { products, transactions, users } = require("../util/database/schema");
 const db = require("../util/database/setup");
 const { validationResult } = require("express-validator");
 
@@ -8,7 +8,9 @@ exports.allProducts = async (_req, res, next) => {
     const allProducts = await db
       .select()
       .from(products)
-      .where(sql`products.ex_date > CONVERT_TZ(CURRENT_TIMESTAMP, @@session.time_zone, '+00:00')`);
+      .where(
+        sql`products.ex_date > CONVERT_TZ(CURRENT_TIMESTAMP, @@session.time_zone, '+00:00')`
+      );
     res.status(200).json(allProducts);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
@@ -18,13 +20,13 @@ exports.allProducts = async (_req, res, next) => {
 
 exports.createProduct = async (req, res, next) => {
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
     const err = new Error(errors.array()[0].msg);
     err.statusCode = 422;
     return next(err);
   }
-  
+
   const product = {
     name: req.body.name,
     image: req.body.image,
@@ -46,13 +48,13 @@ exports.createProduct = async (req, res, next) => {
 
 exports.newBidder = async (req, res, next) => {
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
     const err = new Error(errors.array()[0].msg);
     err.statusCode = 422;
     return next(err);
   }
-  
+
   const productId = req.body.productId;
   const buyerId = +req.userId;
   const newPrice = +req.body.newPrice;
@@ -91,6 +93,46 @@ exports.newBidder = async (req, res, next) => {
       .where(eq(productId, products.id));
 
     res.status(200).json({ message: "Updated successfully" });
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
+};
+
+exports.sold = async (req, res, next) => {
+  try {
+    const products = await db
+      .select({
+        name: transactions.name,
+        image: transactions.image,
+        price: transactions.price,
+        buyerName: users.name,
+        buyerEmail: users.email,
+      })
+      .from(transactions)
+      .innerJoin(users, eq(users.id, transactions.buyer_id))
+      .where(eq(transactions.seller_id, req.userId));
+    res.status(200).json(products);
+  } catch (err) {
+    if (!err.statusCode) err.statusCode = 500;
+    next(err);
+  }
+};
+
+exports.bought = async (req, res, next) => {
+  try {
+    const products = await db
+      .select({
+        name: transactions.name,
+        image: transactions.image,
+        price: transactions.price,
+        sellerName: users.name,
+        sellerEmail: users.email,
+      })
+      .from(transactions)
+      .innerJoin(users, eq(users.id, transactions.seller_id))
+      .where(eq(transactions.buyer_id, req.userId));
+    res.status(200).json(products);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
     next(err);

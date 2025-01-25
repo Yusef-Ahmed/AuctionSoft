@@ -28,4 +28,8 @@ router.put(
   productsControllers.newBidder
 );
 
+router.get("/sold", isAuth, productsControllers.sold);
+
+router.get("/bought", isAuth, productsControllers.bought);
+
 module.exports = router;

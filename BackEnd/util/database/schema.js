@@ -33,7 +33,7 @@ exports.reviews = mysqlTable("reviews", {
   reviewer: bigint({ mode: 'number', unsigned: true }).references(() => this.users.id).notNull(),
 });
 
-exports.sold = mysqlTable("sold", {
+exports.transactions = mysqlTable("transactions", {
   id: serial().primaryKey(),
   name: varchar({ length: 256 }).notNull(),
   image: varchar({ length: 256 }).notNull(),
