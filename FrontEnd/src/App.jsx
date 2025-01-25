@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
-import Products, { productsLoader } from "./pages/Products";
+import Products, { newBidder, productsLoader } from "./pages/Products";
 import { handleLogOut, logInCheck } from "./util/authentication";
 import Auth, { authAction } from "./pages/Auth";
 
@@ -20,6 +20,7 @@ function App() {
           path: "/auctions",
           element: <Products />,
           loader: productsLoader,
+          action: newBidder,
         },
         { path: "/auth", element: <Auth />, action: authAction },
         { path: "/logOut", action: handleLogOut },

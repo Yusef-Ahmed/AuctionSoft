@@ -8,7 +8,7 @@ exports.allProducts = async (_req, res, next) => {
     const allProducts = await db
       .select()
       .from(products)
-      .where(sql`products.ex_date > CURRENT_TIMESTAMP`);
+      .where(sql`products.ex_date > CONVERT_TZ(CURRENT_TIMESTAMP, @@session.time_zone, '+00:00')`);
     res.status(200).json(allProducts);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
@@ -69,19 +69,19 @@ exports.newBidder = async (req, res, next) => {
 
     if (!product || new Date(product.ex_date) - new Date() < 0) {
       const err = new Error("The product doesn't exist anymore");
-      err.statusCode = 401;
+      err.statusCode = 404;
       return next(err);
     }
 
     if (buyerId == product.seller_id) {
       const err = new Error("You can't bid on you own product");
-      err.statusCode = 401;
+      err.statusCode = 403;
       return next(err);
     }
 
     if (newPrice <= +product.price) {
       const err = new Error("You need to bid with a bigger price");
-      err.statusCode = 401;
+      err.statusCode = 400;
       return next(err);
     }
 

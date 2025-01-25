@@ -30,6 +30,7 @@ export async function authAction({ request }) {
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem('expiration', expiration.toISOString());
   localStorage.setItem("token", resData.token);
+  localStorage.setItem("userId", resData.userId);
 
   return redirect("/auctions");
 }
