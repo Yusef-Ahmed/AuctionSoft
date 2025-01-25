@@ -4,8 +4,11 @@ const productsRoutes = require("./routes/productsRoutes");
 const reviewsRoutes = require("./routes/reviewsRoutes");
 const bodyParser = require("body-parser");
 const task = require("./schedule");
+const cors = require('cors')
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 

@@ -21,14 +21,14 @@ export function logInCheck() {
 }
 
 export function checkAuthLoader() {
-  const token = getToken()
-  
+  const token = getToken();
+
   if (!token || expiredToken()) {
     logOut();
-    return redirect("/auth");
+    return true;
   }
-  
-  return null;
+
+  return false;
 }
 
 export function handleLogOut() {

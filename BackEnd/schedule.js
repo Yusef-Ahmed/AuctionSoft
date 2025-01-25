@@ -8,7 +8,7 @@ const task = cron.schedule("* * * * *", async () => {
     const selectedProducts = await db
       .select()
       .from(products)
-      .where(sql`products.ex_date <= CURRENT_TIMESTAMP`);
+      .where(sql`products.ex_date <= CONVERT_TZ(CURRENT_TIMESTAMP, @@session.time_zone, '+00:00')`);
     if (selectedProducts.length) {
       await db.insert(sold).values(selectedProducts);
       await db

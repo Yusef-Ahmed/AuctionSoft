@@ -27,7 +27,6 @@ export async function authAction({ request }) {
   }
 
   const expiration = new Date();
-  console.log(expiration.getHours());
   expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem('expiration', expiration.toISOString());
   localStorage.setItem("token", resData.token);
