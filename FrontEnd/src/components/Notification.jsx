@@ -4,7 +4,6 @@ import { BadgeCheck, CircleAlert, Info, TriangleAlert } from "lucide-react";
 
 function Notification({ status, message }) {
   useEffect(() => {
-    console.log({ status, message });
     toast[status == 200 ? "success" : "error"](message);
   }, [message]);
 
