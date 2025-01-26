@@ -29,6 +29,13 @@
       "when": 1737835677918,
       "tag": "0003_early_wither",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1737847252860,
+      "tag": "0004_aromatic_boom_boom",
+      "breakpoints": true
     }
   ]
 }

@@ -27,7 +27,7 @@ function Header() {
             (isActive ? "border-b-2 " : "") +
             "will-change-transform transition-all duration-300 hover:scale-125 hover:-translate-y-2"
           }
-          to={"/sold"}
+          to={"/transaction/sold"}
         >
           Sold
         </NavLink>
@@ -36,7 +36,7 @@ function Header() {
             (isActive ? "border-b-2 " : "") +
             "will-change-transform transition-all duration-300 hover:scale-125 hover:-translate-y-2"
           }
-          to={"/bought"}
+          to={"/transaction/bought"}
         >
           Bought
         </NavLink>

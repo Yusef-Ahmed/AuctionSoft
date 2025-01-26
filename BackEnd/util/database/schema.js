@@ -27,7 +27,7 @@ exports.products = mysqlTable("products", {
 
 exports.reviews = mysqlTable("reviews", {
   id: serial().primaryKey(),
-  review: varchar({ length: 256 }).notNull().unique(),
+  review: varchar({ length: 256 }).notNull(),
   rating: tinyint().notNull(),
   owner: bigint({ mode: 'number', unsigned: true }).references(() => this.users.id).notNull(),
   reviewer: bigint({ mode: 'number', unsigned: true }).references(() => this.users.id).notNull(),

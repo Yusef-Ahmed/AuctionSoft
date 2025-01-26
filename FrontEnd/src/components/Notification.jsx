@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { BadgeCheck, CircleAlert, Info, TriangleAlert } from "lucide-react";
 
-function Notification({ error, status }) {
+function Notification({ status, message }) {
   useEffect(() => {
-    toast[status](error);
-  }, [error, status]);
+    console.log({ status, message });
+    toast[status == 200 ? "success" : "error"](message);
+  }, [message]);
 
   return (
     <div>

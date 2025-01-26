@@ -1,14 +1,29 @@
 const { eq } = require("drizzle-orm");
 const { reviews, users } = require("../util/database/schema");
 const db = require("../util/database/setup");
+const { validationResult } = require("express-validator");
 
 exports.addReview = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const err = new Error(errors.array()[0].msg);
+    err.statusCode = 422;
+    return next(err);
+  }
+
   const review = {
     review: req.body.review,
     rating: req.body.rating,
     owner: req.params.id,
     reviewer: req.userId,
   };
+
+  if (review.reviewer == review.owner) {
+    const err = new Error("You can't give yourself a review");
+    err.statusCode = 422;
+    return next(err);
+  }
 
   try {
     await db.insert(reviews).values(review);

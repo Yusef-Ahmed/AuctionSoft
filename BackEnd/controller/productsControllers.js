@@ -103,6 +103,7 @@ exports.sold = async (req, res, next) => {
   try {
     const products = await db
       .select({
+        id: transactions.id,
         name: transactions.name,
         image: transactions.image,
         price: transactions.price,
@@ -110,7 +111,7 @@ exports.sold = async (req, res, next) => {
         buyerEmail: users.email,
       })
       .from(transactions)
-      .innerJoin(users, eq(users.id, transactions.buyer_id))
+      .leftJoin(users, eq(users.id, transactions.buyer_id))
       .where(eq(transactions.seller_id, req.userId));
     res.status(200).json(products);
   } catch (err) {
@@ -123,9 +124,11 @@ exports.bought = async (req, res, next) => {
   try {
     const products = await db
       .select({
+        id: transactions.id,
         name: transactions.name,
         image: transactions.image,
         price: transactions.price,
+        sellerId: transactions.seller_id,
         sellerName: users.name,
         sellerEmail: users.email,
       })

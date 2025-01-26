@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Products, { newBidder, productsLoader } from "./pages/Products";
 import { handleLogOut, logInCheck } from "./util/authentication";
 import Auth, { authAction } from "./pages/Auth";
+import Transactions, { transactionLoader } from "./pages/Transactions";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,11 @@ function App() {
           element: <Products />,
           loader: productsLoader,
           action: newBidder,
+        },
+        {
+          path: "/transaction/:mode",
+          element: <Transactions />,
+          loader: transactionLoader,
         },
         { path: "/auth", element: <Auth />, action: authAction },
         { path: "/logOut", action: handleLogOut },

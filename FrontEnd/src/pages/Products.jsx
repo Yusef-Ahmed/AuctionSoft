@@ -5,15 +5,12 @@ import Notification from "../components/Notification";
 
 function Products() {
   let products = useLoaderData();
-  const message = useActionData() || {};
+  const data = useActionData() || {};
 
   return (
     <>
-      <Notification
-        error={message.error}
-        status={message.status == 200 ? "success" : "error"}
-      />
-      <Cards newBidder={message} products={products} />
+      <Notification status={data.status} message={data.message} />
+      <Cards newBidder={data} products={products} />
     </>
   );
 }
@@ -56,15 +53,16 @@ export async function newBidder({ request }) {
     return redirect("/auth");
   }
 
-  let res = { error: resData.message, status: response.status };
-
-  if (response.ok) {
-    res.id = data.productId;
-    res.price = data.newPrice;
+  if (!response.ok) {
+    return { message: resData.message, status: response.status };
   }
-  console.log(res);
 
-  return res;
+  return {
+    message: resData.message,
+    status: response.status,
+    id: data.productId,
+    price: data.newPrice,
+  };
 }
 
 export default Products;

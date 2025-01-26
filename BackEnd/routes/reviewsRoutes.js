@@ -12,7 +12,7 @@ router.post(
       .trim()
       .isLength({ min: 3, max: 200 })
       .withMessage("Review must be at least 3 chars and at most 200"),
-    body("rating").isInt({min: 1, max : 5}).withMessage("Rate should be between 1 and 5"),
+    body("rating").isInt({min: 1, max : 5}).withMessage("Rate should be integer between 1 and 5"),
   ],
   isAuth,
   reviewsControllers.addReview

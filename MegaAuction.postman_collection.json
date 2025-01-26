@@ -289,7 +289,25 @@
 					"name": "allReviews",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTczNzg0NjgxMiwiZXhwIjoxNzM3OTMzMjEyfQ.Jc7u7jHiEEelCbuIJENpFJBbpeOyzM9EFa3PnoyYg04",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/reviews/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"2"
+							]
+						}
 					},
 					"response": []
 				}

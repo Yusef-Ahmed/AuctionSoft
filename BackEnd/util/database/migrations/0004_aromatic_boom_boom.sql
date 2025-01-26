@@ -1,0 +1,1 @@
+ALTER TABLE `reviews` DROP INDEX `reviews_review_unique`;
