@@ -32,6 +32,11 @@ export async function transactionLoader({ params }) {
     }
   );
 
+  if (response.status == 401) {
+    logOut();
+    return redirect("/auth");
+  }
+
   const resData = await response.json();
 
   return resData;

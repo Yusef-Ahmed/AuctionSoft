@@ -6,6 +6,7 @@ import Products, { newBidder, productsLoader } from "./pages/Products";
 import { handleLogOut, logInCheck } from "./util/authentication";
 import Auth, { authAction } from "./pages/Auth";
 import Transactions, { transactionLoader } from "./pages/Transactions";
+import CreateProduct, { createAction } from "./pages/CreateProduct";
 
 function App() {
   const router = createBrowserRouter([
@@ -23,6 +24,7 @@ function App() {
           loader: productsLoader,
           action: newBidder,
         },
+        {path:"/createProduct", element: <CreateProduct />, action: createAction},
         {
           path: "/transaction/:mode",
           element: <Transactions />,

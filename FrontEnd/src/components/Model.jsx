@@ -1,7 +1,8 @@
 import { Dialog } from "primereact/dialog";
-import { getToken } from "../util/authentication";
+import { getToken, logOut } from "../util/authentication";
 import { useEffect, useState } from "react";
 import Reviews from "./Reviews";
+import { redirect } from "react-router-dom";
 
 function Model({ setVisible, position, visible }) {
   const [reviews, setReviews] = useState([]);
@@ -58,6 +59,11 @@ async function reviewsLoader(id) {
   const response = await fetch("http://localhost:8080/reviews/" + id, {
     headers: { authorization: getToken() },
   });
+
+  if (response.status == 401) {
+    logOut();
+    return redirect("/auth");
+  }
 
   const resData = await response.json();
 

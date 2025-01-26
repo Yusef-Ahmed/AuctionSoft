@@ -40,6 +40,15 @@ function Header() {
         >
           Bought
         </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            (isActive ? "border-b-2 " : "") +
+            "will-change-transform transition-all duration-300 hover:scale-125 hover:-translate-y-2"
+          }
+          to={"/createProduct"}
+        >
+          New product
+        </NavLink>
       </center>
       {isLoggedIn ? (
         <Form action={"/logOut"} method="post">

@@ -85,13 +85,29 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Final test\",\r\n    \"image\": \"https://i.pinimg.com/736x/b6/a0/64/b6a064006e8965bdd40128bbc8618a54.jpg\",\r\n    \"price\": 999,\r\n    \"ex_date\": \"2025-01-25T06:13:00Z\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "with image",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/E:/ANIME/33dd5240264237c0fae84e52616fae21.jpg"
+								},
+								{
+									"key": "price",
+									"value": "5235",
+									"type": "text"
+								},
+								{
+									"key": "ex_date",
+									"value": "2025-01-26T08:55:00.000Z",
+									"type": "text"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:8080/products/createProduct",

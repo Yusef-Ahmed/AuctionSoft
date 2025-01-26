@@ -1,8 +1,8 @@
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
 import Rating from "@mui/material/Rating";
-import { getToken } from "../util/authentication";
-import { useActionData } from "react-router-dom";
+import { getToken, logOut } from "../util/authentication";
+import { redirect, useActionData } from "react-router-dom";
 import Notification from "./Notification";
 
 function Reviews({ reviews, productRatings, rates, sellerId }) {
@@ -217,6 +217,11 @@ async function sendReview(review, rate, sellerId) {
     },
     body: JSON.stringify({ review: review, rating: rate }),
   });
+
+  if (response.status == 401) {
+    logOut();
+    return redirect("/auth");
+  }
 
   const resData = await response.json();
   resData.status = response.status;

@@ -29,7 +29,7 @@ exports.createProduct = async (req, res, next) => {
 
   const product = {
     name: req.body.name,
-    image: req.body.image,
+    image: req.file.filename,
     price: +req.body.price,
     ex_date: new Date(req.body.ex_date),
     seller_id: req.userId,

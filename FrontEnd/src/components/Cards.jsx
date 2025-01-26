@@ -37,11 +37,11 @@ function Cards({ products, newBidder, transactions, show }) {
       )}
       <div className="flex flex-wrap gap-14 justify-center">
         {items.map((product) => (
-          <div key={product.id} className="border w-1/5 rounded-lg">
+          <div key={product.id} className="border w-1/5 rounded-lg h-fit">
             <h1 className="py-2 text-center text-xl font-bold">
               {product.name}
             </h1>
-            <img alt="product image" src={product.image} />
+            <img className="h-74 w-full" alt="product image" src={"http://localhost:8080/" + product.image} />
             {!transactions && (
               <section className="flex flex-col p-3 gap-4">
                 <div className="flex justify-between">
