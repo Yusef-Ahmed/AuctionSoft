@@ -7,11 +7,13 @@ const io = require("../socket");
 exports.allProducts = async (_req, res, next) => {
   try {
     const allProducts = await db
-      .select()
+      .select({ ...products, buyerName: users.name })
       .from(products)
+      .leftJoin(users, eq(users.id, products.buyer_id))
       .where(
         sql`products.ex_date > CONVERT_TZ(CURRENT_TIMESTAMP, @@session.time_zone, '+00:00')`
-      );
+      )
+      .orderBy(products.ex_date);
     res.status(200).json(allProducts);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;
@@ -24,6 +26,12 @@ exports.createProduct = async (req, res, next) => {
 
   if (!errors.isEmpty()) {
     const err = new Error(errors.array()[0].msg);
+    err.statusCode = 422;
+    return next(err);
+  }
+
+  if (!req.file) {
+    const err = new Error("You need to upload image");
     err.statusCode = 422;
     return next(err);
   }
@@ -59,6 +67,7 @@ exports.newBidder = async (req, res, next) => {
 
   const productId = +req.body.productId;
   const buyerId = +req.userId;
+  const buyerName = req.userName;
   const newPrice = +req.body.newPrice;
 
   try {
@@ -95,7 +104,10 @@ exports.newBidder = async (req, res, next) => {
       .where(eq(productId, products.id));
 
     io.getIO().emit("products", {
-      productId, newPrice, buyerId 
+      productId,
+      newPrice,
+      buyerId,
+      buyerName,
     });
 
     res.status(200).json({ message: "Updated successfully" });

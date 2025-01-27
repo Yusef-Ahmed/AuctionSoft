@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const authRoutes = require("./routes/authRoutes");
 const productsRoutes = require("./routes/productsRoutes");
 const reviewsRoutes = require("./routes/reviewsRoutes");
@@ -14,6 +15,10 @@ const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
+
+if (!fs.existsSync("images")) {
+  fs.mkdirSync("images");
+}
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

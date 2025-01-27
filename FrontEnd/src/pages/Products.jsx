@@ -26,6 +26,7 @@ function Products() {
               ...item,
               price: bidder.newPrice,
               buyer_id: bidder.buyerId,
+              buyerName: bidder.buyerName,
             };
           }
           return item;

@@ -40,4 +40,5 @@ export function logOut() {
   localStorage.removeItem("token");
   localStorage.removeItem("expiration");
   localStorage.removeItem("userId");
+  localStorage.removeItem("userName");
 }

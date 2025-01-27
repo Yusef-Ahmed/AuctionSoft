@@ -4,6 +4,28 @@ import { Form } from "react-router-dom";
 function Cards({ products, transactions, show, handleExpired }) {
   const userId = localStorage.getItem("userId");
 
+  const handleBuyerStatus = (product) => {
+    const status = {
+      isBuyer: product.buyer_id == userId,
+      newBidder: product.seller_id == userId && product.buyer_id != 0,
+      noBidder: !product.buyer_id,
+      noBidderSeller: product.seller_id == userId && !product.buyer_id,
+    };
+
+    switch (true) {
+      case status.isBuyer:
+        return <p className="text-green-400">{product.buyerName}</p>;
+      case status.noBidderSeller:
+        return <p className="text-amber-400">No bidder yet</p>;
+      case status.noBidder:
+        return <p className="text-blue-400">Be the first bidder</p>;
+      case status.newBidder:
+        return <p className="text-amber-400">{product.buyerName}</p>;
+      default:
+        return <p className="text-red-400">Bid now</p>;
+    }
+  };
+
   return (
     <>
       {!products.length && (
@@ -24,20 +46,7 @@ function Cards({ products, transactions, show, handleExpired }) {
               <section className="flex flex-col p-3 gap-4">
                 <div className="flex justify-between">
                   <p>Price : {product.price}$</p>
-                  {product.buyer_id == userId && (
-                    <p className="text-green-400">&larr; Your bid</p>
-                  )}
-                  {!product.buyer_id && (
-                    <p className="text-blue-400">No bidder yet!</p>
-                  )}
-                  {product.buyer_id &&
-                    product.seller_id != userId &&
-                    product.buyer_id != userId && (
-                      <p className="text-red-400">Bid now !</p>
-                    )}
-                  {product.buyer_id && product.seller_id == userId && (
-                    <p className="text-amber-400">Someone bade !</p>
-                  )}
+                  {handleBuyerStatus(product, userId)}
                 </div>
                 <Countdown
                   className="text-center"

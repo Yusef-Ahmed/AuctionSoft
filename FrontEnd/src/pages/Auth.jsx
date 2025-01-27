@@ -31,6 +31,7 @@ export async function authAction({ request }) {
   localStorage.setItem('expiration', expiration.toISOString());
   localStorage.setItem("token", resData.token);
   localStorage.setItem("userId", resData.userId);
+  localStorage.setItem("userName", resData.userName);
 
   return redirect("/auctions");
 }
