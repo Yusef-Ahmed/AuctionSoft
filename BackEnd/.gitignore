@@ -5,6 +5,8 @@ build/
 
 .env
 
-src/database/migrations/
+util/database/migrations/
 
 testing.sql
+
+images

@@ -1,34 +1,8 @@
-import { useEffect, useState } from "react";
 import Countdown from "react-countdown";
 import { Form } from "react-router-dom";
 
-function Cards({ products, newBidder, transactions, show }) {
-  const [items, setItems] = useState(products);
+function Cards({ products, transactions, show, handleExpired }) {
   const userId = localStorage.getItem("userId");
-
-  useEffect(() => setItems(products), [products]);
-
-  if (newBidder) {
-    useEffect(() => {
-      if (newBidder.id) {
-        setItems((prev) =>
-          prev.map((product) => {
-            if (product.id == newBidder.id)
-              return {
-                ...product,
-                price: newBidder.price,
-                buyer_id: localStorage.getItem("userId"),
-              };
-            return product;
-          })
-        );
-      }
-    }, [newBidder]);
-  }
-
-  function handleExpired(id) {
-    setItems((prev) => prev.filter((val) => val.id != id));
-  }
 
   return (
     <>
@@ -36,12 +10,16 @@ function Cards({ products, newBidder, transactions, show }) {
         <h1 className="text-5xl text-center mt-64">No products to show !</h1>
       )}
       <div className="flex flex-wrap gap-14 justify-center">
-        {items.map((product) => (
+        {products.map((product) => (
           <div key={product.id} className="border w-1/5 rounded-lg h-fit">
             <h1 className="py-2 text-center text-xl font-bold">
               {product.name}
             </h1>
-            <img className="h-74 w-full" alt="product image" src={"http://localhost:8080/" + product.image} />
+            <img
+              className="h-74 w-full"
+              alt="product image"
+              src={"http://localhost:8080/" + product.image}
+            />
             {!transactions && (
               <section className="flex flex-col p-3 gap-4">
                 <div className="flex justify-between">
@@ -58,7 +36,7 @@ function Cards({ products, newBidder, transactions, show }) {
                       <p className="text-red-400">Bid now !</p>
                     )}
                   {product.buyer_id && product.seller_id == userId && (
-                    <p className="text-amber-400">Your product</p>
+                    <p className="text-amber-400">Someone bade !</p>
                   )}
                 </div>
                 <Countdown

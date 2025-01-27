@@ -2,15 +2,45 @@ import { redirect, useActionData, useLoaderData } from "react-router-dom";
 import { getToken, logOut } from "../util/authentication";
 import Cards from "../components/Cards";
 import Notification from "../components/Notification";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:8080");
 
 function Products() {
-  let products = useLoaderData();
+  const [items, setItems] = useState([]);
+  const products = useLoaderData();
   const data = useActionData() || {};
+
+  function handleExpired(id) {
+    setItems((prev) => prev.filter((val) => val.id != id));
+  }
+
+  useEffect(() => {
+    setItems(products);
+    socket.on("products", (bidder) => {
+      setItems((prev) =>
+        prev.map((item) => {
+          if (item.id == bidder.productId) {
+            item = {
+              ...item,
+              price: bidder.newPrice,
+              buyer_id: bidder.buyerId,
+            };
+          }
+          return item;
+        })
+      );
+    });
+    return () => {
+      socket.off("products");
+    };
+  }, [products]);
 
   return (
     <>
       <Notification status={data.status} message={data.message} />
-      <Cards newBidder={data} products={products} />
+      <Cards products={items} handleExpired={handleExpired} />
     </>
   );
 }

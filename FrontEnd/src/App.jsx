@@ -23,8 +23,13 @@ function App() {
           element: <Products />,
           loader: productsLoader,
           action: newBidder,
+          shouldRevalidate: ({ formMethod }) => formMethod === "POST",
         },
-        {path:"/createProduct", element: <CreateProduct />, action: createAction},
+        {
+          path: "/createProduct",
+          element: <CreateProduct />,
+          action: createAction,
+        },
         {
           path: "/transaction/:mode",
           element: <Transactions />,

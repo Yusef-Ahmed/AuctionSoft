@@ -56,6 +56,14 @@ app.use((error, _req, res, _next) => {
   res.status(error.statusCode || 500).json({ message: error.message });
 });
 
-app.listen(8080, () => {
-  task.start();
+const server = app.listen(8080, () => {
+  try {
+    task.start();
+    const io = require("./socket").init(server);
+    io.on("connection", () => {
+      console.log("Client connected");
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });

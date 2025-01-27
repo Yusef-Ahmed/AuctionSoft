@@ -2,6 +2,7 @@ const { eq, sql } = require("drizzle-orm");
 const { products, transactions, users } = require("../util/database/schema");
 const db = require("../util/database/setup");
 const { validationResult } = require("express-validator");
+const io = require("../socket");
 
 exports.allProducts = async (_req, res, next) => {
   try {
@@ -37,6 +38,7 @@ exports.createProduct = async (req, res, next) => {
 
   try {
     await db.insert(products).values(product);
+
     res.status(200).json({
       message: "Product created successfully",
     });
@@ -55,7 +57,7 @@ exports.newBidder = async (req, res, next) => {
     return next(err);
   }
 
-  const productId = req.body.productId;
+  const productId = +req.body.productId;
   const buyerId = +req.userId;
   const newPrice = +req.body.newPrice;
 
@@ -91,6 +93,10 @@ exports.newBidder = async (req, res, next) => {
       .update(products)
       .set({ price: newPrice, buyer_id: buyerId })
       .where(eq(productId, products.id));
+
+    io.getIO().emit("products", {
+      productId, newPrice, buyerId 
+    });
 
     res.status(200).json({ message: "Updated successfully" });
   } catch (err) {
