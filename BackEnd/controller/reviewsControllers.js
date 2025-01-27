@@ -2,6 +2,7 @@ const { eq } = require("drizzle-orm");
 const { reviews, users } = require("../util/database/schema");
 const db = require("../util/database/setup");
 const { validationResult } = require("express-validator");
+const { desc } = require("drizzle-orm");
 
 exports.addReview = async (req, res, next) => {
   const errors = validationResult(req);
@@ -46,7 +47,8 @@ exports.allReviews = async (req, res, next) => {
       })
       .from(reviews)
       .leftJoin(users, eq(reviews.reviewer, users.id))
-      .where(eq(reviews.owner, userId));
+      .where(eq(reviews.owner, userId))
+      .orderBy(desc(reviews.id));
     res.status(200).json(reviewsData);
   } catch (err) {
     if (!err.statusCode) err.statusCode = 500;

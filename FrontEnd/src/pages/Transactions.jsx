@@ -1,6 +1,6 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { redirect, useLoaderData, useParams } from "react-router-dom";
 import Cards from "../components/Cards";
-import { getToken } from "../util/authentication";
+import { getToken, logOut } from "../util/authentication";
 import Model from "../components/Model";
 import { useState } from "react";
 

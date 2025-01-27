@@ -22,7 +22,7 @@ function Cards({ products, transactions, show, handleExpired }) {
       case status.newBidder:
         return <p className="text-amber-400">{product.buyerName}</p>;
       default:
-        return <p className="text-red-400">Bid now</p>;
+        return <p className="text-red-400">{product.buyerName}</p>;
     }
   };
 

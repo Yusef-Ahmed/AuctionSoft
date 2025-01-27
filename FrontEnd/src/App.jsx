@@ -3,7 +3,12 @@ import RootLayout from "./pages/RootLayout";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Products, { newBidder, productsLoader } from "./pages/Products";
-import { handleLogOut, logInCheck } from "./util/authentication";
+import {
+  alreadyLogged,
+  checkAuthLoader,
+  handleLogOut,
+  logInCheck,
+} from "./util/authentication";
 import Auth, { authAction } from "./pages/Auth";
 import Transactions, { transactionLoader } from "./pages/Transactions";
 import CreateProduct, { createAction } from "./pages/CreateProduct";
@@ -29,13 +34,19 @@ function App() {
           path: "/createProduct",
           element: <CreateProduct />,
           action: createAction,
+          loader: checkAuthLoader,
         },
         {
           path: "/transaction/:mode",
           element: <Transactions />,
           loader: transactionLoader,
         },
-        { path: "/auth", element: <Auth />, action: authAction },
+        {
+          path: "/auth",
+          element: <Auth />,
+          action: authAction,
+          loader: alreadyLogged,
+        },
         { path: "/logOut", action: handleLogOut },
       ],
     },

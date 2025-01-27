@@ -25,10 +25,16 @@ export function checkAuthLoader() {
 
   if (!token || expiredToken()) {
     logOut();
-    return true;
+    return redirect("/auth");
   }
 
-  return false;
+  return null;
+}
+
+export function alreadyLogged() {
+  if (getToken()) return redirect("/");
+
+  return null;
 }
 
 export function handleLogOut() {

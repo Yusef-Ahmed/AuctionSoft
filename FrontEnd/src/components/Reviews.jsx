@@ -5,7 +5,7 @@ import { getToken, logOut } from "../util/authentication";
 import { redirect, useActionData } from "react-router-dom";
 import Notification from "./Notification";
 
-function Reviews({ reviews, productRatings, rates, sellerId }) {
+function Reviews({ reviews, productRatings, rates, sellerId, setReviews }) {
   const reviewRef = useRef(null);
   const review = useRef();
   const stars = useRef(0);
@@ -26,6 +26,15 @@ function Reviews({ reviews, productRatings, rates, sellerId }) {
         setMessage(response);
       }
     );
+
+    setReviews((prev) => [
+      {
+        review: review.current.value,
+        rating: stars.current,
+        reviewerName: localStorage.getItem("userName"),
+      },
+      ...prev,
+    ]);
   }
 
   return (
