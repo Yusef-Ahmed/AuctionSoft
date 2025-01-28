@@ -38,7 +38,7 @@ function Cards({ products, transactions, show, handleExpired }) {
               {product.name}
             </h1>
             <img
-              className="h-74 w-full"
+              className="h-74 w-full p-2"
               alt="product image"
               src={"http://localhost:8080/" + product.image}
             />
