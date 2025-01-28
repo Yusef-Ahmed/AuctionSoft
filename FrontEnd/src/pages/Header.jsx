@@ -6,7 +6,7 @@ function Header() {
   const userName = localStorage.getItem("userName");
 
   return (
-    <header className="text-lg p-5 mb-5 pt-0 flex justify-between items-center border-b-2 border-gray-500 hover:border-gray-400 mx-auto font-semibold">
+    <header className="text-lg p-5 mb-5 pt-0 flex justify-between items-center border-b-2 border-gray-500 hover:border-gray-400 mx-auto font-bold">
       <NavLink to={"/"}>
         <img
           className="transition-all duration-300 hover:scale-110 hover:-translate-y-2"

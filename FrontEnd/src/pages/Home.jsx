@@ -23,11 +23,11 @@ function Home() {
   return (
     <>
       <div className="flex justify-between">
-        <div className="w-1/2 my-auto mt-30 ml-5">
-          <h1 className="text-6xl font-bold tracking-tight">
+        <div className="w-4/7 my-auto mt-30 ml-5">
+          <h1 className="text-6xl font-black tracking-tight">
             Your Ultimate Destination to Win, and Save Big!
           </h1>
-          <p className="max-w-2xl mt-14 text-lg leading-8 text-slate-300">
+          <p className="max-w-2xl mt-8 text-lg leading-8 text-slate-300">
             Experience the thrill of auctions! Explore unique items, bid
             confidently, and enjoy incredible savings. From rare finds to
             everyday treasures, our secure platform makes buying and selling
@@ -50,21 +50,21 @@ function Home() {
           </div>
         </div>
         <div className="flex w-1/2 justify-center">
-        <Floating>
-          <div className="mt-20">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={currentImageIndex}
-                src={images[currentImageIndex]}
-                className="h-96"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 100 }}
-                transition={{ duration: 1 }}
-              />
-            </AnimatePresence>
-          </div>
-        </Floating>
+          <Floating>
+            <div className="mt-20">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImageIndex}
+                  src={images[currentImageIndex]}
+                  className="h-96"
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 100 }}
+                  transition={{ duration: 1 }}
+                />
+              </AnimatePresence>
+            </div>
+          </Floating>
         </div>
       </div>
     </>

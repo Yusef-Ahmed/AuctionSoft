@@ -37,6 +37,7 @@ function CreateProduct() {
           className="transition border p-2 rounded-md focus:-translate-y-1"
           name="price"
           type="number"
+          step="0.01"
         />
       </section>
       {image && <img className="h-60 rounded-md w-60 m-auto" src={image} />}

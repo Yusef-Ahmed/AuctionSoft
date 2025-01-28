@@ -18,20 +18,34 @@ function Products() {
 
   useEffect(() => {
     setItems(products);
-    socket.on("products", (bidder) => {
-      setItems((prev) =>
-        prev.map((item) => {
-          if (item.id == bidder.productId) {
-            item = {
-              ...item,
-              price: bidder.newPrice,
-              buyer_id: bidder.buyerId,
-              buyerName: bidder.buyerName,
-            };
-          }
-          return item;
-        })
-      );
+    socket.on("products", (call) => {
+      if (call.status == "newBidder") {
+        setItems((prev) =>
+          prev.map((item) => {
+            if (item.id == call.productId) {
+              item = {
+                ...item,
+                price: call.newPrice,
+                buyer_id: call.buyerId,
+                buyerName: call.buyerName,
+              };
+            }
+            return item;
+          })
+        );
+      } else if (call.status == "createProduct") {
+        setItems((prev) => [
+          {
+            id: call.id,
+            name: call.name,
+            image: call.image,
+            price: call.price,
+            ex_date: call.ex_date,
+            seller_id: call.seller_id,
+          },
+          ...prev,
+        ]);
+      }
     });
     return () => {
       socket.off("products");

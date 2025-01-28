@@ -45,7 +45,13 @@ exports.createProduct = async (req, res, next) => {
   };
 
   try {
-    await db.insert(products).values(product);
+    const [prodId] = await db.insert(products).values(product).$returningId();
+
+    io.getIO().emit("products", {
+      status : "createProduct",
+      id: prodId.id,
+      ...product
+    });
 
     res.status(200).json({
       message: "Product created successfully",
@@ -104,6 +110,7 @@ exports.newBidder = async (req, res, next) => {
       .where(eq(productId, products.id));
 
     io.getIO().emit("products", {
+      status : "newBidder",
       productId,
       newPrice,
       buyerId,

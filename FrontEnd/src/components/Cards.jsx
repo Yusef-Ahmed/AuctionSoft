@@ -33,7 +33,7 @@ function Cards({ products, transactions, show, handleExpired }) {
       )}
       <div className="flex flex-wrap gap-14 justify-center">
         {products.map((product) => (
-          <div key={product.id} className="border w-1/5 rounded-lg h-fit">
+          <div key={product.id} className="border w-72 rounded-lg h-fit">
             <h1 className="py-2 text-center text-xl font-bold">
               {product.name}
             </h1>
@@ -59,6 +59,7 @@ function Cards({ products, transactions, show, handleExpired }) {
                     className="transition focus:-translate-y-1 border rounded-sm p-1 pl-4 w-1/2 text-center"
                     placeholder="Your bid"
                     type="number"
+                    step={0.01}
                     name="newPrice"
                   />
                   <button className="transition border rounded-sm hover:cursor-pointer hover:bg-green-500 hover:text-gray-950 hover:-translate-y-1 w-1/3">
