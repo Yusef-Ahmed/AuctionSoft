@@ -18,11 +18,14 @@ function Model({ setVisible, position, visible }) {
   let productRatings = 0;
   const rates = [0, 0, 0, 0, 0];
 
-  reviews.map((review) => {
-    productRatings += review.rating;
-    rates[review.rating - 1]++;
-  });
-  productRatings = (productRatings / reviews.length).toFixed(1);
+  if (reviews) {
+    reviews.map((review) => {
+      console.log(review);
+      productRatings += review.rating;
+      rates[review.rating - 1]++;
+    });
+    productRatings = (productRatings / reviews.length).toFixed(1);
+  }
 
   return (
     <Dialog
@@ -46,7 +49,7 @@ function Model({ setVisible, position, visible }) {
       maskStyle={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
     >
       <Reviews
-      setReviews={setReviews}
+        setReviews={setReviews}
         sellerId={visible}
         reviews={reviews}
         productRatings={productRatings}

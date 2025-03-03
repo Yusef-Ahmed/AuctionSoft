@@ -24,17 +24,16 @@ function Reviews({ reviews, productRatings, rates, sellerId, setReviews }) {
     sendReview(review.current.value, stars.current, sellerId).then(
       (response) => {
         setMessage(response);
+        setReviews((prev) => [
+          {
+            review: review.current.value,
+            rating: stars.current,
+            reviewerName: localStorage.getItem("userName"),
+          },
+          ...prev,
+        ]);
       }
     );
-
-    setReviews((prev) => [
-      {
-        review: review.current.value,
-        rating: stars.current,
-        reviewerName: localStorage.getItem("userName"),
-      },
-      ...prev,
-    ]);
   }
 
   return (
